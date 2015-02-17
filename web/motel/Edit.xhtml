@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MotelEditDlg" widgetVar="MotelEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditMotelTitle}">
+            <h:form id="MotelEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{motelController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditMotelLabel_nitMot}" for="nitMot" />
+                        <p:inputText id="nitMot" value="#{motelController.selected.nitMot}" title="#{bundle.EditMotelTitle_nitMot}" required="true" requiredMessage="#{bundle.EditMotelRequiredMessage_nitMot}"/>
+                        <p:outputLabel value="#{bundle.EditMotelLabel_nomMot}" for="nomMot" />
+                        <p:inputText id="nomMot" value="#{motelController.selected.nomMot}" title="#{bundle.EditMotelTitle_nomMot}" required="true" requiredMessage="#{bundle.EditMotelRequiredMessage_nomMot}"/>
+                        <p:outputLabel value="#{bundle.EditMotelLabel_dirMot}" for="dirMot" />
+                        <p:inputText id="dirMot" value="#{motelController.selected.dirMot}" title="#{bundle.EditMotelTitle_dirMot}" required="true" requiredMessage="#{bundle.EditMotelRequiredMessage_dirMot}"/>
+                        <p:outputLabel value="#{bundle.EditMotelLabel_telMot}" for="telMot" />
+                        <p:inputText id="telMot" value="#{motelController.selected.telMot}" title="#{bundle.EditMotelTitle_telMot}" required="true" requiredMessage="#{bundle.EditMotelRequiredMessage_telMot}"/>
+                        <p:outputLabel value="#{bundle.EditMotelLabel_EMailMot}" for="EMailMot" />
+                        <p:inputText id="EMailMot" value="#{motelController.selected.EMailMot}" title="#{bundle.EditMotelTitle_EMailMot}" required="true" requiredMessage="#{bundle.EditMotelRequiredMessage_EMailMot}"/>
+                        <p:outputLabel value="#{bundle.EditMotelLabel_codUsu}" for="codUsu" />
+                        <p:selectOneMenu id="codUsu" value="#{motelController.selected.codUsu}" required="true" requiredMessage="#{bundle.EditMotelRequiredMessage_codUsu}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
+                                           var="codUsuItem"
+                                           itemValue="#{codUsuItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditMotelLabel_codCiud}" for="codCiud" />
+                        <p:selectOneMenu id="codCiud" value="#{motelController.selected.codCiud}" required="true" requiredMessage="#{bundle.EditMotelRequiredMessage_codCiud}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{ciudadController.itemsAvailableSelectOne}"
+                                           var="codCiudItem"
+                                           itemValue="#{codCiudItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{motelController.update}" value="#{bundle.Save}" update="display,:MotelListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MotelEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MotelEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

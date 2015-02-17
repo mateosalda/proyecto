@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EstadoreservaCreateDlg" widgetVar="EstadoreservaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateEstadoreservaTitle}">
+            <h:form id="EstadoreservaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{estadoreservaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateEstadoreservaLabel_codestRes}" for="codestRes" />
+                        <p:inputText id="codestRes" value="#{estadoreservaController.selected.codestRes}" title="#{bundle.CreateEstadoreservaTitle_codestRes}" required="true" requiredMessage="#{bundle.CreateEstadoreservaRequiredMessage_codestRes}"/>
+                        <p:outputLabel value="#{bundle.CreateEstadoreservaLabel_estadoReserva}" for="estadoReserva" />
+                        <p:inputText id="estadoReserva" value="#{estadoreservaController.selected.estadoReserva}" title="#{bundle.CreateEstadoreservaTitle_estadoReserva}" required="true" requiredMessage="#{bundle.CreateEstadoreservaRequiredMessage_estadoReserva}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{estadoreservaController.create}" value="#{bundle.Save}" update="display,:EstadoreservaListForm:datalist,:growl" oncomplete="handleSubmit(args,'EstadoreservaCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="EstadoreservaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

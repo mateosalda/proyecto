@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ReservadetalleCreateDlg" widgetVar="ReservadetalleCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateReservadetalleTitle}">
+            <h:form id="ReservadetalleCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{reservadetalleController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateReservadetalleLabel_codresDet}" for="codresDet" />
+                        <p:inputText id="codresDet" value="#{reservadetalleController.selected.codresDet}" title="#{bundle.CreateReservadetalleTitle_codresDet}" required="true" requiredMessage="#{bundle.CreateReservadetalleRequiredMessage_codresDet}"/>
+                        <p:outputLabel value="#{bundle.CreateReservadetalleLabel_pinCli}" for="pinCli" />
+                        <p:inputText id="pinCli" value="#{reservadetalleController.selected.pinCli}" title="#{bundle.CreateReservadetalleTitle_pinCli}" required="true" requiredMessage="#{bundle.CreateReservadetalleRequiredMessage_pinCli}"/>
+                        <p:outputLabel value="#{bundle.CreateReservadetalleLabel_nitMot}" for="nitMot" />
+                        <p:inputText id="nitMot" value="#{reservadetalleController.selected.nitMot}" title="#{bundle.CreateReservadetalleTitle_nitMot}" required="true" requiredMessage="#{bundle.CreateReservadetalleRequiredMessage_nitMot}"/>
+                        <p:outputLabel value="#{bundle.CreateReservadetalleLabel_codHab}" for="codHab" />
+                        <p:inputText id="codHab" value="#{reservadetalleController.selected.codHab}" title="#{bundle.CreateReservadetalleTitle_codHab}" required="true" requiredMessage="#{bundle.CreateReservadetalleRequiredMessage_codHab}"/>
+                        <p:outputLabel value="#{bundle.CreateReservadetalleLabel_codDec}" for="codDec" />
+                        <p:inputText id="codDec" value="#{reservadetalleController.selected.codDec}" title="#{bundle.CreateReservadetalleTitle_codDec}" required="true" requiredMessage="#{bundle.CreateReservadetalleRequiredMessage_codDec}"/>
+                        <p:outputLabel value="#{bundle.CreateReservadetalleLabel_codestRes}" for="codestRes" />
+                        <p:inputText id="codestRes" value="#{reservadetalleController.selected.codestRes}" title="#{bundle.CreateReservadetalleTitle_codestRes}" required="true" requiredMessage="#{bundle.CreateReservadetalleRequiredMessage_codestRes}"/>
+                        <p:outputLabel value="#{bundle.CreateReservadetalleLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy HH:mm:ss" value="#{reservadetalleController.selected.fecha}" title="#{bundle.EditReservadetalleTitle_fecha}" required="true" requiredMessage="#{bundle.EditReservadetalleRequiredMessage_fecha}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateReservadetalleLabel_precio}" for="precio" />
+                        <p:inputText id="precio" value="#{reservadetalleController.selected.precio}" title="#{bundle.CreateReservadetalleTitle_precio}" required="true" requiredMessage="#{bundle.CreateReservadetalleRequiredMessage_precio}"/>
+                        <p:outputLabel value="#{bundle.CreateReservadetalleLabel_codRes}" for="codRes" />
+                        <p:selectOneMenu id="codRes" value="#{reservadetalleController.selected.codRes}" required="true" requiredMessage="#{bundle.EditReservadetalleRequiredMessage_codRes}">
+                            <f:selectItems value="#{reservaController.itemsAvailableSelectOne}"
+                                           var="codResItem"
+                                           itemValue="#{codResItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{reservadetalleController.create}" value="#{bundle.Save}" update="display,:ReservadetalleListForm:datalist,:growl" oncomplete="handleSubmit(args,'ReservadetalleCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ReservadetalleCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
